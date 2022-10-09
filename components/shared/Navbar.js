@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 
 export const NavItems = (props) => {
   return (
@@ -22,16 +23,18 @@ const Navbar = () => {
     "FAQ",
     "Contact",
   ];
+  const [toggleNavbar, setToggleNavbar] = useState(false);
+  const changeToggleNavbar = () => {
+    setToggleNavbar((current) => !current);
+  };
+  let viewNavbar = toggleNavbar ? "block" : "hidden";
   return (
-    <nav className=" w-20 fixed bg-gray-200 text-black border-r-2 border-gray-400 ">
+    <nav
+      className={` ${viewNavbar} md:block w-20 fixed right-0 bg-gray-200 text-black border-l-2 border-gray-400 `}
+    >
       <div className=" min-h-screen flex flex-col justify-between items-center">
         <div>
-          <div className="flex justify-center items-center">
-            <Link href="/">
-              <div className=" cursor-pointer flex justify-center items-center w-8 h-8 mt-5 mb-9  bg-black rounded-full "></div>
-            </Link>
-          </div>
-
+          <div className="flex justify-center items-center mt-5"></div>
           <ul>
             {navNames.map((item) => (
               <NavItems key={item}>{item}</NavItems>
@@ -39,9 +42,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="mb-4 w-8 h-8 rounded-full bg-red-400 text-center">
-          S
-        </div>
+        <div className="mb-4 w-8 h-8 rounded-full bg-red-400 text-center"></div>
       </div>
     </nav>
   );
